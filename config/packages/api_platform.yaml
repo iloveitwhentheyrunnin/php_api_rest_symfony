@@ -3,6 +3,7 @@ api_platform:
     version: 1.0.0
     formats:
         jsonld: ['application/ld+json']
+        json: ['application/json']  # Ajout du support pour le format JSON standard
     docs_formats:
         jsonld: ['application/ld+json']
         jsonopenapi: ['application/vnd.openapi+json']
@@ -19,6 +20,6 @@ api_platform:
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
-        json: ['application/merge-patch+json']
+        json: ['application/json']
     swagger:
         versions: [3]
