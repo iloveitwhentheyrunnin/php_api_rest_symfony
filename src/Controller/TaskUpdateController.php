@@ -49,4 +49,52 @@ class TaskUpdateController extends AbstractController
 
         return new JsonResponse(['message' => 'Tâche mise à jour avec succès'], 200);
     }
+    
+    #[Route('/create', name: 'app_task_create', methods:"POST")]
+    public function createTask(Request $request, SerializerInterface $serializer, ValidatorInterface $validator, ManagerRegistry $doctrine): JsonResponse
+    {
+        $taskData = $request->getContent();
+
+        $task = new Task(); // Instanciation de la tâche
+
+        $task = $serializer->deserialize($taskData, Task::class, 'json');
+
+        $errors = $validator->validate($task);
+
+        if (count($errors) > 0) {
+            // Gérer les erreurs de validation
+            return new JsonResponse(['message' => 'Validation failed', 'errors' => $errors], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        $entityManager = $doctrine->getManager();
+
+        // Création de ma tâche
+        $entityManager->persist($task);
+
+        // Ecriture en BDD
+        $entityManager->flush();
+        
+        return new JsonResponse(['message' => 'Tâche créée avec succès', 'task' => $task], JsonResponse::HTTP_CREATED);
+    }
+
+
+    #[Route('/delete/{id}', name: 'app_task_delete', methods:"DELETE")]
+    public function deleteTask(int $id, Request $request, SerializerInterface $serializer, ValidatorInterface $validator, ManagerRegistry $doctrine): JsonResponse
+    {
+        $task = $doctrine->getRepository(Task::class)->find($id);
+
+        if(empty($task)){
+            return new JsonResponse(['message'=> 'Task not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $entityManager = $doctrine->getManager();
+
+        // Suppression de ma tâche
+        $entityManager->remove($task);
+
+        // Ecriture en BDD
+        $entityManager->flush();
+        
+        return new JsonResponse(['message' => 'Tâche bien suprimée'], 204);
+    }
 }
