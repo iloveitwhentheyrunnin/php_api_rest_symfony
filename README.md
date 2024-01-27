@@ -14,19 +14,20 @@ Il y'a donc une entité Task, et un TaskUpdateController.
 ## Installation
 
 1. Clonez le référentiel depuis GitHub :
-   ```bash
-   git clone https://github.com/votre-utilisateur/flutter_todoApp.git
-    ```
+
+ ```bash
+ git clone https://github.com/votre-utilisateur/flutter_todoApp.git
+ ```
 
 2. Accédez au répertoire du projet :
 
- ```bash
+```bash
 cd flutter_todoApp
 ```
 
 3. Installez les dépendances avec Composer :
 
- ```bash
+```bash
 composer install
 ```
 
