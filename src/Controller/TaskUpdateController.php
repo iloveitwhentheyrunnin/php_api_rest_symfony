@@ -79,6 +79,42 @@ class TaskUpdateController extends AbstractController
         return new JsonResponse(['message' => 'Tâche créée avec succès', 'task' => json_decode($serializedTask)], JsonResponse::HTTP_CREATED);
     }
 
+    #[Route('/edit/{id}', name: 'app_task_edit', methods:"PATCH")]
+    public function editTask(int $id, Request $request, SerializerInterface $serializer, ValidatorInterface $validator, ManagerRegistry $doctrine): JsonResponse
+    {
+        $task = $doctrine->getRepository(Task::class)->find($id);
+
+        if (!$task) {
+            return new JsonResponse(['message' => 'Task not found'], JsonResponse::HTTP_NOT_FOUND);
+        }
+
+        // Deserialization
+        $data = json_decode($request->getContent(), true);
+
+        // mise a jour si la data est là
+        if (isset($data['titre'])) {
+            $task->setTitre($data['titre']);
+        }
+
+        if (isset($data['description'])) {
+            $task->setDescription($data['description']);
+        }
+
+        $errors = $validator->validate($task);
+
+        if (count($errors) > 0) {
+            // Gérer les erreurs de validation
+            return new JsonResponse(['message' => 'Validation failed', 'errors' => $errors], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->flush();
+
+        $serializedTask = $serializer->serialize($task, 'json');
+
+        return new JsonResponse(['message' => 'Tâche changée avec succès', 'task' => json_decode($serializedTask)], 200);
+    }
+
 
     #[Route('/delete/{id}', name: 'app_task_delete', methods:"DELETE")]
     public function deleteTask(int $id, Request $request, SerializerInterface $serializer, ValidatorInterface $validator, ManagerRegistry $doctrine): JsonResponse
