@@ -1,6 +1,6 @@
 # Symfony ToDoApp API - BACKEND
 
-Bienvenue dans la documentation de l'API Symfony 6 pour le projet flutter_todoApp. 
+Bienvenue dans la documentation de l'API Symfony 6 pour le projet Todo List Flutter & Php Api Rest. 
 Cette API REST backend fournit les fonctionnalités nécessaires pour la gestion des tâches de l'application ToDoApp développée en Flutter.
 
 La deuxième partie de ce projet, se trouve à l'adresse suivante: 
