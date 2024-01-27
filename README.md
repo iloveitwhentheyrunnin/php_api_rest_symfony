@@ -16,13 +16,14 @@ Il y'a donc une entité Task, et un TaskUpdateController.
 1. Clonez le référentiel depuis GitHub :
 
  ```bash
- git clone https://github.com/votre-utilisateur/flutter_todoApp.git
+ git clone https://github.com/votre-utilisateur/php_api_rest_symfony.git
  ```
 
 2. Accédez au répertoire du projet :
 
 ```bash
-cd flutter_todoApp
+cd php_api_rest_symfony
+
 ```
 
 3. Installez les dépendances avec Composer :
