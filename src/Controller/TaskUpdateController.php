@@ -57,7 +57,7 @@ class TaskUpdateController extends AbstractController
 
         $task = new Task(); // Instanciation de la tâche
 
-        $task = $serializer->deserialize($taskData, Task::class, 'json');
+        $task = $serializer->deserialize($taskData, Task::class, 'json',['object_to_populate' => $task]);
 
         $errors = $validator->validate($task);
 
@@ -73,8 +73,10 @@ class TaskUpdateController extends AbstractController
 
         // Ecriture en BDD
         $entityManager->flush();
-        
-        return new JsonResponse(['message' => 'Tâche créée avec succès', 'task' => $task], JsonResponse::HTTP_CREATED);
+
+        $serializedTask = $serializer->serialize($task, 'json');
+
+        return new JsonResponse(['message' => 'Tâche créée avec succès', 'task' => json_decode($serializedTask)], JsonResponse::HTTP_CREATED);
     }
 
 
