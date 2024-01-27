@@ -2,7 +2,9 @@
 
 Bienvenue dans la documentation de l'API Symfony 6 pour le projet flutter_todoApp. 
 Cette API REST backend fournit les fonctionnalités nécessaires pour la gestion des tâches de l'application ToDoApp développée en Flutter.
-Il y'a donc une entité Task, et un TaskUpdateController.
+
+La deuxième partie de ce projet, se trouve à l'adresse suivante: 
+https://github.com/iloveitwhentheyrunnin/flutter_web_app
 
 ## Configuration Requise
 - PHP 8.0 ou supérieur
