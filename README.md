@@ -11,7 +11,7 @@ https://github.com/iloveitwhentheyrunnin/flutter_web_app
 - Composer
 - Symfony CLI
 - MySQL (ou autre système de gestion de base de données pris en charge par Symfony)
-- BDD : todoapp_bdd (dans le repo)
+- BDD : todoapp_bdd (dans le repo, dossier bdd)
 
 ## Installation
 
